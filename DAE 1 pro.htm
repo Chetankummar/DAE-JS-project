@@ -1,0 +1,1975 @@
+<HTML>
+<HEAD>
+<TITLE>ST. Patrick's DAE Aptitute Test</TITLE>
+
+<SCRIPT language=Javascript> 
+
+
+/*var up,down;var min1,sec1;
+var cmin1,csec1,cmin2,name,csec2;
+function Minutes(data) 
+{
+for(var i=0;i<data.length;i++) 
+if(data.substring(i,i+1)==":") 
+break;  
+return(data.substring(0,i)); 
+}
+function Seconds(data) {        
+for(var i=0;i<data.length;i++) 
+if(data.substring(i,i+1)==":") 
+break;  
+return(data.substring(i+1,data.length)); 
+}
+function Display(min,sec) {     
+var disp;       
+if(min<=9) disp=" 0";   
+else disp=" ";  
+disp+=min+":";  
+if(sec<=9) disp+="0"+sec;       
+else disp+=sec; 
+return(disp); 
+}
+function Up() 
+{ 
+cmin1=0;        
+csec1=0;        
+min1=1+Minutes(document.sw.beg1.value); 
+sec1=0+Seconds(document.sw.beg1.value); 
+
+var name1
+var roll1
+
+roll=sw.text3.value
+name=sw.text1.value
+if(name=="" || roll=="")
+{
+alert(" Please Enter Your name and Roll Number ")
+sw.disp1.value=""
+}
+else 
+{
+UpRepeat(); 
+startt();
+}
+}
+function UpRepeat() 
+{   
+csec1++;        
+if(csec1==60) 
+{
+csec1=0; cmin1++; 
+}
+document.sw.disp1.value=Display(cmin1,csec1);   
+if((cmin1==min1)&&(csec1==sec1)) 
+{
+alert("Your time has been finished.Thanks for appearing in the test");
+window.open("categories.htm","main") 
+}      
+else
+{
+up=setTimeout("UpRepeat()",1000); 
+}
+}*/
+
+var up, down;
+var min1, sec1;
+var cmin1, csec1, cmin2, name, csec2;
+var testDuration = 60 * 60; // Set test duration to 60 minutes (3600 seconds)
+var remainingTime = testDuration; // Timer countdown
+var timerRunning = false;
+
+function Minutes(data) {
+    for (var i = 0; i < data.length; i++)
+        if (data.substring(i, i + 1) == ":")
+            break;
+    return (data.substring(0, i));
+}
+
+function Seconds(data) {
+    for (var i = 0; i < data.length; i++)
+        if (data.substring(i, i + 1) == ":")
+            break;
+    return (data.substring(i + 1, data.length));
+}
+
+function Display(min, sec) {
+    var disp;
+    
+      if (min <= 9) disp = " 0 ";
+  
+    if (min <= 9) disp = " 0";
+    
+    else disp = " ";
+    disp += min + ":";
+    
+    
+    if (sec <= 9) disp += "0" + sec;
+    
+    else disp += sec;
+    return (disp);
+}
+
+// Starts the timer when the test begins
+function Up() {
+    cmin1 = 0;
+    csec1 = 0;
+    
+
+    min1 = 1 + Minutes(document.sw.beg1.value);
+    sec1 = 0 + Seconds(document.sw.beg1.value);
+    
+    roll1 = sw.text3.value;
+    name = sw.text1.value;
+    
+    roll1=sw.text3.value;
+    name=sw.text1.value;
+    
+    
+    
+    if (name === "" || /^\d+$/.test(name)) 
+    {
+        alert("Please enter your name.");
+        return; // Stop further execution if validation fails
+    
+    }
+    
+    if (roll1 === "" || isNaN(roll1) || parseInt(roll1) != roll1) {
+        alert("Please enter your valid roll number.");
+        return; // Stop further execution if validation fails
+    }
+    
+     //Proceed with the rest of your logic if validation passes
+    if (name !== "" && roll1 !== "") 
+    {
+      if (!timerRunning) {
+            timerRunning = true;
+            UpRepeat();
+            startt();
+        }
+    }
+}
+    
+    
+    
+    
+    
+
+    /*if (name == "" || roll1 == "") 
+    {
+      alert(" Please Enter Your name and Roll Number ");
+        sw.disp1.value = "";
+    } 
+    else 
+    {
+        if (!timerRunning) 
+        {
+            timerRunning = true;
+            UpRepeat();
+            startt();
+        }
+    }*/
+//}
+
+
+// Main timer function that runs every second
+function UpRepeat() {
+tt=sw.disp1.value
+    if (remainingTime <= 0) 
+    {
+        clearTimeout(up); // Stop the timer when the test time is up
+        alert("Your time has been finished. Thanks for appearing in the test");
+        sw.nxt.disabled=true
+        sw.result.disabled=false
+        
+        //window.open("categories.htm", "main");
+        return; // Stop further execution
+        
+        
+        
+    }
+
+    remainingTime--; // Decrease the remaining time by 1 second
+    cmin1 = Math.floor(remainingTime / 60); // Get minutes
+    csec1 = remainingTime % 60; // Get seconds
+
+    document.sw.disp1.value = Display(cmin1, csec1);
+
+    // Repeat the function after 1 second
+    up = setTimeout("UpRepeat()", 1000);
+}
+
+// Call this function when user moves to the next question
+function nextQuestion() {
+    if (remainingTime <= 0) {
+        clearTimeout(up); // Stop the timer if the test is over
+        alert("Your time has been finished. Thanks for appearing in the test");
+        window.open("categories.htm", "main");
+        return; // Stop further execution
+    }
+
+    // Here, you can include logic for moving to the next question.
+    // If it's the last question, you can stop the timer as well.
+    var totalQuestions = 30; // Assuming 10 questions in total, adjust as necessary
+    var currentQuestion = 29; // Update this value dynamically based on your logic
+    if (currentQuestion >= totalQuestions) 
+    {
+        clearTimeout(up); // Stop the timer after the last question
+        alert("Test completed!");
+    }
+}
+
+// Optional: Start function to initialize the timer
+function startt() {
+    // Add any setup or initialization logic if needed
+}
+
+var mymessage = "Sorry you can not view the Page Source";
+function rtclickcheck(keyp)
+ {
+if (navigator.appName == "Netscape" && keyp.which == 3)
+ {
+    alert(mymessage);
+
+    return false;
+
+  }
+   
+  if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2)
+  {
+
+    alert(mymessage);
+
+    return false;
+
+  }
+
+  }
+   document.onmousedown = rtclickcheck
+
+</script>
+
+<SCRIPT LANGUAGE=javascript>
+
+var tt=""
+var qr=1
+var n=1
+var nr_correct=0
+var test
+
+var question1="The natural logarithm has the base _________________."
+var answer11 ="π"
+var answer12 ="0"
+var answer13 ="10"
+var answer14 ="e"
+var correct1=4
+
+var question2="The Sum of 15 observation is 150, the mean is = _______________."
+var answer21="10"
+var answer22="1.5"
+var answer23="15"
+var answer24="8"
+var correct2=1
+
+var question3="If x=1, y=1 then x-y+xy = _______."
+var answer31="-1"
+var answer32="0"
+var answer33="2"
+var answer34="1"
+var correct3=4
+
+var question4="Simplify √128 / √2 = ________"                       
+var answer41="4"
+var answer42="8"
+var answer43="16"
+var answer44="6"
+var correct4=2
+
+var question5="If the sum of the measures of two angles is 180o, the angles are called ______angles."
+var answer51="Supplementary"
+var answer52="Complementary"
+var answer53="Adjacent"
+var answer54="Interior"
+var correct5=1
+
+var question6="In a right angled triangle the side opposite to right angle is called _______. "
+var answer61="Diagonal"
+var answer62="Altitude"
+var answer63="Hypotenuse"
+var answer64="Base"
+var correct6=3
+
+var question7="[4  0 ; 0  4] is ______ matrix."
+var answer71="Unit"
+var answer72="Zero"
+var answer73="Column"
+var answer74="Scalar"
+var correct7=4
+
+var question8="Write 172,000 in scientific notation  __________."
+var answer81="1.72 x 10^5"
+var answer82="172 x 10^3 "
+var answer83="17.2 x 10^4"
+var answer84="172 x 10^4"
+var correct8=1
+
+var question9="cosƟ x SecƟ = _______"
+var answer91="cosƟ"
+var answer92="1"
+var answer93="λ"
+var answer94="secƟ"
+var correct9=2
+
+var question10="The L.C.M. of x^3 - y^3 and x^6 - y^6 = _________."
+var answer101="x^3 - y^3"
+var answer102="x^6 - y^6"
+var answer103="x^6 + y^6"
+var answer104="x^3 + y^3"
+var correct10=2
+
+var question11="In 12, 13, 4, 4, 5, 7, 9 the mode = ________________."
+var answer111="4"
+var answer112="5.5"
+var answer113="3"
+var answer114="9"
+var correct11=1
+
+var question12="b^m x b^2 = _________"
+var answer121="b^2m"
+var answer122="a^m/2"
+var answer123="b^m+2"
+var answer124="a^2m+2"
+var correct12=4
+
+var question13="Solve, 9x^2 = 81  then  x = __________."
+var answer131="(2,3)"
+var answer132="(3, -3)"
+var answer133="(3,3)"
+var answer134="(2, -3)"
+var correct13=2
+
+var question14="1 + tan45° = Sec _______"
+var answer141="30°"
+var answer142="90°"
+var answer143="45°"
+var answer144="60°"
+var correct14=3
+
+var question15="_________should be added to make x^4 + 2x^2  a perfect square."
+var answer151="1"
+var answer152="2x^2"
+var answer153="x^2/2"
+var answer154="x^2"
+var correct15=1
+
+var question16="For a force F, Fx  = 6N and Fy = 6N. What is the angle between F and the axis cannot occur?"
+var answer161="45°"
+var answer162="30°"
+var answer163="Less than 30°"
+var answer164="60°"
+var correct16=1
+
+var question17="One meter is equal to _____________. "
+var answer171="10^4 mm"
+var answer172="10^6 mm"
+var answer173="10^2 mm"
+var answer174="10^3 mm"
+var correct17=4
+
+var question18="If the force acting on a body is doubled then the acceleration produced is ___________."
+var answer181="1/2"
+var answer182="double"
+var answer183="1/4"
+var answer184="quadrupled"
+var correct18=2
+
+var question19="A force of 50N acts on a body. If moment arm is 0.5 m, find the value of torque."
+var answer191="25 Nm"
+var answer192="15Nm"
+var answer193="10Nm"
+var answer194="5Nm"
+var correct19=1
+
+var question20="G is called"
+var answer201="Gravitational Constant"
+var answer202="A"
+var answer203="8N"
+var answer204="6N"
+var correct20=1
+
+var question21="If the speed of a body is double its Kinetic energy becomes _______________."
+var answer211="half"
+var answer212="twice"
+var answer213="three times"
+var answer214="four times"
+var correct21=4
+
+var question22="A pair of scissors is an example of _________."
+var answer221="pulley"
+var answer222="wheel and axle"
+var answer223="lever"
+var answer224="inclined plane"
+var correct22=3
+
+var question23="In transverse waves the distance between two consecutive crests or between two consecutive roughs is called"
+var answer231="Speed"
+var answer232="Wave length"
+var answer233="Velocity"
+var answer234="Displacement"
+var correct23=2
+
+var question24="If the frequency of wave  f= 30 Hz and wave-length  ƛ= 0.2m then the velocity of the wave is ______________."
+var answer241="6m/s"
+var answer242="150m/s"
+var answer243="0.0066m/s"
+var answer244="8m/s"
+var correct24=1
+
+var question25="The image formed in a plane mirror is __________. "
+var answer251="real"
+var answer252="inverted"
+var answer253="virtual and erect"
+var answer254="real and inverted"
+var correct25=3
+
+var question26="Like poles of a magnet ___________ each other."
+var answer261="neither attract nor repel"
+var answer262="attract"
+var answer263="repel"
+var answer264="none of these"
+var correct26=3
+
+var question27="If the force applied is parallel to the direction, then work done is __________."
+var answer271="maximum"
+var answer272="minimum"
+var answer273="zero"
+var answer274="negative"
+var correct27=1
+
+var question28="The number of protons in the nucleus is called __________. "
+var answer281="Avagadro number"
+var answer282="Atomic number"
+var answer283="Mass number"
+var answer284="Nucleous number"
+var correct28=2
+
+var question29="The base quality among the following is ______________."
+var answer291="force"
+var answer292="torque"
+var answer293="time"
+var answer294="velocity"
+var correct29=3
+
+var question30="The speed of light is ________________ m/s."
+var answer301="3x10^6"
+var answer302="1.86x10^6"
+var answer303="3x10^10"
+var answer304="3x10^8"
+var correct30=4
+
+var question31="________________ you remember to lock the door?"
+var answer311="Haven’t"
+var answer312="Aren’t"
+var answer313="Didn’t"
+var answer314="Doesn’t"
+var correct31=4
+
+var question32="The number of vowels in English are___________"
+var answer321="5"
+var answer322="3"
+var answer323="4"
+var answer324="2"
+var correct32=1
+
+var question33="Choose the correct answer: The Pakistani ________ met his counterpart in London"
+var answer331="Console"
+var answer332="Council"
+var answer333="Councel"
+var answer334="Counsel"
+var correct33=2
+
+var question34="Listening means _____________."
+var answer341="lending ear"
+var answer342="lending ear to spoken ear"
+var answer343="hearing the sound around"
+var answer344="lending ear to spoken words to understand"
+var correct34=4
+
+var question35="Identify the part of speech for the word in brackets. I saw a woman walking (along) the road."
+var answer351="Preposition"
+var answer352="Adjective"
+var answer353="Adverb"
+var answer354="Conjunction"
+var correct35=1
+
+var question36="Give the Antonym of the following word “FOE” "
+var answer361="Enemy"
+var answer362="Fraud"
+var answer363="Foul"
+var answer364="Friend"
+var correct36=4
+
+var question37="English language communication skills are:"
+var answer371="listening, thinking, speaking, reading"
+var answer372="listening, speaking, reading, writing"
+var answer373="listening, speaking, skimming, reading"
+var answer374="thinking, skimming, reading, writing"
+var correct37=2
+
+var question38="He is one of the boys _______________"
+var answer381="who have written the letters."
+var answer382="who is the written the letter."
+var answer383="who has written the letter."
+var answer384="who is being written the letters."
+var correct38=3
+
+var question39="The repetition of similar ending sounds."
+var answer391="Alliteration"
+var answer392="Rhyme"
+var answer393="Poem"
+var answer394="Similies"
+var correct39=2
+
+var question40="The film was more enjoyable ____________ we had expected."
+var answer401="than"
+var answer402="as"
+var answer403="since"
+var answer404="after"
+var correct40=1
+
+var question41="The speed of light with the rise in the temperature of the medium _________."
+var answer411="decreases"
+var answer412="remains unaltered"
+var answer413="increases"
+var answer414="drops sharply"
+var correct40=2
+
+var question42="If a car is moving with a velocity of 10 m/s and its mass is 200 kg then its kinetic energy (N-m) will be"
+var answer421="50000"
+var answer422="100"
+var answer423="0"
+var answer424="10000"
+var correct40=4
+
+var question43="In a right angle triangle if perpendicular is 1m and base is 2m then the hypotenuse will be"
+var answer431="√2"
+var answer432="√7"
+var answer433="√5"
+var answer434="√6"
+var correct40=3
+
+var question44="Window is to pane as book is to"
+var answer441="cover"
+var answer442="page"
+var answer443="novel"
+var answer444="glass"
+var correct40=2
+
+var question45="What will come next? 4	 8  12 ?"
+var answer451="20"
+var answer452="18"
+var answer453="22"
+var answer454="16"
+var correct40=4
+
+var question46="When a gas is turned into a liquid, the process is called _____________."
+var answer461="evaporation"
+var answer462="sublimation"
+var answer463="crystallization"
+var answer464="condensation"
+var correct40=4
+
+var question47="Which of the following jumbled words on rearranging give the name of a game."
+var answer471="OHKYEC"
+var answer472="AINP"
+var answer473="OKYNEM"
+var answer474="REOSH"
+var correct40=1
+
+var question48="Which weighs more? 1 Kg iron OR 1 Kg cotton?"
+var answer481="Iron"
+var answer482="copper"
+var answer483="both weigh exactly 1 Kg"
+var answer484="none of the above"
+var correct40=3
+
+var question49="If you are facing north and make a turn of 360 degrees you will be facing."
+var answer491="north"
+var answer492="south"
+var answer493="west"
+var answer494="east"
+var correct40=1
+
+var question50="If gear 1 moves anticlockwise then gear 3 will move"
+var answer501="Clockwise"
+var answer502="Right to Left"
+var answer503="Left to Right"
+var answer504="Anticlockwise"
+var correct40=4
+
+
+function startt()
+{
+
+msg=alert("Section - A (Mathematics) 30 Marks.");
+
+
+
+
+test=sw.text2.value
+
+sw.q.value= "Question "+ qr
+sw.start.disabled =true
+    sw.result.disabled =true 
+        sw.op1.disabled=false
+             sw.op2.disabled=false
+                   sw.op3.disabled=false
+                         sw.op4.disabled=false
+                                sw.nxt.disabled=false    
+    
+   sw.question.value=question1
+         sw.a1.value=answer11
+           sw.a2.value=answer12
+              sw.a3.value=answer13
+                sw.a4.value=answer14
+sw.feedback.value=""
+nr_correct=0
+n=1
+}
+
+function next(form)
+{
+qr++
+ sw.q.value="Question " + qr
+ 
+                sw.op1.disabled=false
+                sw.op2.disabled=false
+                sw.op3.disabled=false
+                sw.op4.disabled=false
+
+if (qr > 50) 
+{
+    alert("You have completed all the questions.");
+    sw.nxt.disabled=true
+    sw.result.disabled=false
+    clearTimeout(up)
+
+    }  
+
+             
+if(n==1)
+{
+
+sw.question.value=question2
+sw.a1.value=answer21
+sw.a2.value=answer22
+sw.a3.value=answer23
+sw.a4.value=answer24
+sw.feedback.value=""
+
+}
+else
+if (n==2)
+{
+
+sw.question.value=question3
+sw.a1.value=answer31
+sw.a2.value=answer32
+sw.a3.value=answer33
+sw.a4.value=answer34
+sw.feedback.value=""
+
+}
+else 
+if(n==3)
+{
+
+sw.question.value=question4
+sw.a1.value=answer41
+sw.a2.value=answer42
+sw.a3.value=answer43
+sw.a4.value=answer44
+sw.feedback.value=""
+
+}
+else 
+if(n==4)
+{
+
+sw.question.value=question5
+sw.a1.value=answer51
+sw.a2.value=answer52
+sw.a3.value=answer53
+sw.a4.value=answer54
+sw.feedback.value=""
+
+}
+else
+if(n==5)
+{
+sw.question.value=question6
+sw.a1.value=answer61
+sw.a2.value=answer62
+sw.a3.value=answer63
+sw.a4.value=answer64
+sw.feedback.value=""
+
+}
+else
+if(n==6)
+{
+sw.question.value=question7
+sw.a1.value=answer71
+sw.a2.value=answer72
+sw.a3.value=answer73
+sw.a4.value=answer74
+sw.feedback.value=""
+
+}
+else
+if(n==7)
+{
+sw.question.value=question8
+sw.a1.value=answer81
+sw.a2.value=answer82
+sw.a3.value=answer83
+sw.a4.value=answer84
+sw.feedback.value=""
+
+}
+else
+if(n==8)
+{
+sw.question.value=question9
+sw.a1.value=answer91
+sw.a2.value=answer92
+sw.a3.value=answer93
+sw.a4.value=answer94
+sw.feedback.value=""
+
+}
+else
+if(n==9)
+{
+sw.question.value=question10
+sw.a1.value=answer101
+sw.a2.value=answer102
+sw.a3.value=answer103
+sw.a4.value=answer104
+sw.feedback.value=""
+
+}
+else
+if(n==10)
+{
+sw.question.value=question11
+sw.a1.value=answer111
+sw.a2.value=answer112
+sw.a3.value=answer113
+sw.a4.value=answer114
+sw.feedback.value=""
+
+}
+else
+if(n==11)
+{
+sw.question.value=question12
+sw.a1.value=answer121
+sw.a2.value=answer122
+sw.a3.value=answer123
+sw.a4.value=answer124
+sw.feedback.value=""
+
+}
+else
+if(n==12)
+{
+sw.question.value=question13
+sw.a1.value=answer131
+sw.a2.value=answer132
+sw.a3.value=answer133
+sw.a4.value=answer134
+sw.feedback.value=""
+
+}
+else
+if(n==13)
+{
+sw.question.value=question14
+sw.a1.value=answer141
+sw.a2.value=answer142
+sw.a3.value=answer143
+sw.a4.value=answer144
+sw.feedback.value=""
+
+}
+else
+if(n==14)
+{
+sw.question.value=question15
+sw.a1.value=answer151
+sw.a2.value=answer152
+sw.a3.value=answer153
+sw.a4.value=answer154
+sw.feedback.value=""
+
+}
+else
+if(n==15)
+{
+sw.question.value=question16
+sw.a1.value=answer161
+sw.a2.value=answer162
+sw.a3.value=answer163
+sw.a4.value=answer164
+sw.feedback.value=""
+
+
+msg=alert("Section - B (Physics)   30 Marks.")
+
+
+}
+else
+if(n==16)
+{
+sw.question.value=question17
+sw.a1.value=answer171
+sw.a2.value=answer172
+sw.a3.value=answer173
+sw.a4.value=answer174
+sw.feedback.value=""
+
+}
+else
+if(n==17)
+{
+sw.question.value=question18
+sw.a1.value=answer181
+sw.a2.value=answer182
+sw.a3.value=answer183
+sw.a4.value=answer184
+sw.feedback.value=""
+
+}
+else
+if(n==18)
+{
+sw.question.value=question19
+sw.a1.value=answer191
+sw.a2.value=answer192
+sw.a3.value=answer193
+sw.a4.value=answer194
+sw.feedback.value=""
+
+}
+else
+if(n==19)
+{
+sw.question.value=question20
+sw.a1.value=answer201
+sw.a2.value=answer202
+sw.a3.value=answer203
+sw.a4.value=answer204
+sw.feedback.value=""
+
+}
+
+else
+if(n==20)
+{
+sw.question.value=question21
+sw.a1.value=answer211
+sw.a2.value=answer212
+sw.a3.value=answer213
+sw.a4.value=answer214
+sw.feedback.value=""
+
+}
+
+else
+if(n==21)
+{
+sw.question.value=question22
+sw.a1.value=answer221
+sw.a2.value=answer222
+sw.a3.value=answer223
+sw.a4.value=answer224
+sw.feedback.value=""
+
+}
+
+else
+if(n==22)
+{
+sw.question.value=question23
+sw.a1.value=answer231
+sw.a2.value=answer232
+sw.a3.value=answer233
+sw.a4.value=answer234
+sw.feedback.value=""
+
+}
+
+else
+if(n==23)
+{
+sw.question.value=question24
+sw.a1.value=answer241
+sw.a2.value=answer242
+sw.a3.value=answer243
+sw.a4.value=answer244
+sw.feedback.value=""
+
+}
+
+else
+if(n==24)
+{
+sw.question.value=question25
+sw.a1.value=answer251
+sw.a2.value=answer252
+sw.a3.value=answer253
+sw.a4.value=answer254
+sw.feedback.value=""
+
+}
+
+else
+if(n==25)
+{
+sw.question.value=question26
+sw.a1.value=answer261
+sw.a2.value=answer262
+sw.a3.value=answer263
+sw.a4.value=answer264
+sw.feedback.value=""
+
+}
+
+else
+if(n==26)
+{
+sw.question.value=question27
+sw.a1.value=answer271
+sw.a2.value=answer272
+sw.a3.value=answer273
+sw.a4.value=answer274
+sw.feedback.value=""
+
+}
+
+else
+if(n==27)
+{
+sw.question.value=question28
+sw.a1.value=answer281
+sw.a2.value=answer282
+sw.a3.value=answer283
+sw.a4.value=answer284
+sw.feedback.value=""
+
+}
+
+else
+if(n==28)
+{
+sw.question.value=question29
+sw.a1.value=answer291
+sw.a2.value=answer292
+sw.a3.value=answer293
+sw.a4.value=answer294
+sw.feedback.value=""
+
+}
+
+else
+if(n==29)
+{
+sw.question.value=question30
+sw.a1.value=answer301
+sw.a2.value=answer302
+sw.a3.value=answer303
+sw.a4.value=answer304
+sw.feedback.value=""
+}
+
+else
+if(n==30)
+{
+sw.question.value=question31
+sw.a1.value=answer311
+sw.a2.value=answer312
+sw.a3.value=answer313
+sw.a4.value=answer314
+sw.feedback.value=""
+
+msg=alert("Section - C (English)   20 Marks.")
+
+}
+
+else
+if(n==31)
+{
+
+sw.question.value=question32
+sw.a1.value=answer321
+sw.a2.value=answer322
+sw.a3.value=answer323
+sw.a4.value=answer324
+sw.feedback.value=""
+
+}
+
+else
+if(n==32)
+{
+
+sw.question.value=question33
+sw.a1.value=answer331
+sw.a2.value=answer332
+sw.a3.value=answer333
+sw.a4.value=answer334
+sw.feedback.value=""
+
+}
+
+else
+if(n==33)
+{
+
+sw.question.value=question34
+sw.a1.value=answer341
+sw.a2.value=answer342
+sw.a3.value=answer343
+sw.a4.value=answer344
+sw.feedback.value=""
+}
+
+else
+if(n==34)
+{
+
+sw.question.value=question35
+sw.a1.value=answer351
+sw.a2.value=answer352
+sw.a3.value=answer353
+sw.a4.value=answer354
+sw.feedback.value=""
+
+}
+else
+if(n==35)
+{
+
+sw.question.value=question36
+sw.a1.value=answer361
+sw.a2.value=answer362
+sw.a3.value=answer363
+sw.a4.value=answer364
+sw.feedback.value=""
+
+}
+
+else
+if(n==36)
+{
+
+sw.question.value=question37
+sw.a1.value=answer371
+sw.a2.value=answer372
+sw.a3.value=answer373
+sw.a4.value=answer374
+sw.feedback.value=""
+
+}
+
+else
+if(n==37)
+{
+
+sw.question.value=question38
+sw.a1.value=answer381
+sw.a2.value=answer382
+sw.a3.value=answer383
+sw.a4.value=answer384
+sw.feedback.value=""
+
+}
+
+else
+if(n==38)
+{
+
+sw.question.value=question39
+sw.a1.value=answer391
+sw.a2.value=answer392
+sw.a3.value=answer393
+sw.a4.value=answer394
+sw.feedback.value=""
+
+}
+
+else
+if(n==39)
+{
+
+sw.question.value=question40
+sw.a1.value=answer401
+sw.a2.value=answer402
+sw.a3.value=answer403
+sw.a4.value=answer404
+sw.feedback.value=""
+
+}
+
+else
+if(n==40)
+{
+
+sw.question.value=question41
+sw.a1.value=answer411
+sw.a2.value=answer412
+sw.a3.value=answer413
+sw.a4.value=answer414
+sw.feedback.value=""
+
+msg=alert("Section - D (Logic & Analysis) 20 Marks.")
+}
+
+else
+if(n==41)
+{
+sw.question.value=question42
+sw.a1.value=answer421
+sw.a2.value=answer422
+sw.a3.value=answer423
+sw.a4.value=answer424
+sw.feedback.value=""
+}
+
+else
+if(n==42)
+{
+
+sw.question.value=question43
+sw.a1.value=answer431
+sw.a2.value=answer432
+sw.a3.value=answer433
+sw.a4.value=answer434
+sw.feedback.value=""
+}
+
+else
+if(n==43)
+{
+
+sw.question.value=question44
+sw.a1.value=answer441
+sw.a2.value=answer442
+sw.a3.value=answer443
+sw.a4.value=answer444
+sw.feedback.value=""
+}
+
+else
+if(n==44)
+{
+
+sw.question.value=question45
+sw.a1.value=answer451
+sw.a2.value=answer452
+sw.a3.value=answer453
+sw.a4.value=answer454
+sw.feedback.value=""
+}
+
+else
+if(n==45)
+{
+
+sw.question.value=question46
+sw.a1.value=answer461
+sw.a2.value=answer462
+sw.a3.value=answer463
+sw.a4.value=answer464
+sw.feedback.value=""
+}
+
+else
+if(n==46)
+{
+
+sw.question.value=question47
+sw.a1.value=answer471
+sw.a2.value=answer472
+sw.a3.value=answer473
+sw.a4.value=answer474
+sw.feedback.value=""
+}
+
+else
+if(n==47)
+{
+
+sw.question.value=question48
+sw.a1.value=answer481
+sw.a2.value=answer482
+sw.a3.value=answer483
+sw.a4.value=answer484
+sw.feedback.value=""
+}
+
+else
+if(n==48)
+{
+
+sw.question.value=question49
+sw.a1.value=answer491
+sw.a2.value=answer492
+sw.a3.value=answer493
+sw.a4.value=answer494
+sw.feedback.value=""
+}
+
+else
+if(n==49)
+{
+
+sw.question.value=question50
+sw.a1.value=answer501
+sw.a2.value=answer502
+sw.a3.value=answer503
+sw.a4.value=answer504
+sw.feedback.value=""
+}
+
+else
+{
+sw.question.value=""
+sw.a1.value=""
+sw.a2.value=""
+sw.a3.value=""
+sw.a4.value=""
+tt=sw.disp1.value
+
+msg=alert("Your Test is Finished")
+sw.question.value="\t\t\tTHE TEST IS FINISHED"
+
+
+sw.q.value=""
+sw.op1.disabled=true
+sw.op2.disabled=true
+sw.op3.disabled=true
+sw.op4.disabled=true
+sw.nxt.disabled=true
+sw.result.disabled=false
+sw.feedback.value=""
+tt=sw.disp1.value
+qr=0
+}
+n++
+}
+
+
+function answer1(form)
+{
+    sw.op1.disabled=true  
+      sw.op2.disabled=true
+         sw.op3.disabled=true
+           sw.op4.disabled =true
+         
+var current_correct
+if(n==1)
+current_correct=correct1
+if(n==2)
+current_correct=correct2
+if(n==3)
+current_correct=correct3
+if(n==4)
+current_correct=correct4
+if(n==5)
+current_correct=correct5
+if(n==6)
+current_correct=correct6
+if(n==7)
+current_correct=correct7
+if(n==8)
+current_correct=correct8
+if(n==9)
+current_correct=correct9
+if(n==10)
+current_correct=correct10
+if(n==11)
+current_correct=correct11
+if(n==12)
+current_correct=correct12
+if(n==13)
+current_correct=correct13
+if(n==14)
+current_correct=correct14
+if(n==15)
+current_correct=correct15
+if(n==16)
+current_correct=correct16
+if(n==17)
+current_correct=correct17
+if(n==18)
+current_correct=correct18
+if(n==19)
+current_correct=correct19
+if(n==20)
+current_correct=correct20
+if(n==21)
+current_correct=correct21
+if(n==22)
+current_correct=correct22
+if(n==23)
+current_correct=correct23
+if(n==24)
+current_correct=correct24
+if(n==25)
+current_correct=correct25
+if(n==26)
+current_correct=correct26
+if(n==27)
+current_correct=correct27
+if(n==28)
+current_correct=correct28
+if(n==29)
+current_correct=correct29
+if(n==30)
+current_correct=correct30
+if(n==31)
+current_correct=correct31
+if(n==32)
+current_correct=correct32
+if(n==33)
+current_correct=correct33
+if(n==34)
+current_correct=correct34
+if(n==35)
+current_correct=correct35
+if(n==36)
+current_correct=correct36
+if(n==37)
+current_correct=correct37
+if(n==38)
+current_correct=correct38
+if(n==39)
+current_correct=correct39
+if(n==40)
+current_correct=correct40
+if(n==41)
+current_correct=correct41
+if(n==42)
+current_correct=correct42
+if(n==43)
+current_correct=correct43
+if(n==44)
+current_correct=correct44
+if(n==45)
+current_correct=correct45
+if(n==46)
+current_correct=correct46
+if(n==47)
+current_correct=correct47
+if(n==48)
+current_correct=correct48
+if(n==49)
+current_correct=correct49
+if(n==50)
+current_correct=correct50
+
+
+//if(current_correct==1)
+//{
+//form1.feedba
+//sw.feedback.value="Correct!"
+nr_correct++
+//}
+//else
+//{
+//sw.feedback.value="Not correct!"
+//sw.question.value= "Correct Answer=Option "+current_correct
+
+}
+
+function answer2()
+{
+    sw.op1.disabled=true
+      sw.op2.disabled=true
+         sw.op3.disabled=true
+           sw.op4.disabled =true
+var current_correct
+if(n==1)
+current_correct=correct1
+if(n==2)
+current_correct=correct2
+if(n==3)
+current_correct=correct3
+if(n==4)
+current_correct=correct4
+if(n==5)
+current_correct=correct5
+if(n==6)
+current_correct=correct6
+if(n==7)
+current_correct=correct7
+if(n==8)
+current_correct=correct8
+if(n==9)
+current_correct=correct9
+if(n==10)
+current_correct=correct10
+if(n==11)
+current_correct=correct11
+if(n==12)
+current_correct=correct12
+if(n==13)
+current_correct=correct13
+if(n==14)
+current_correct=correct14
+if(n==15)
+current_correct=correct15
+if(n==16)
+current_correct=correct16
+if(n==17)
+current_correct=correct17
+if(n==18)
+current_correct=correct18
+if(n==19)
+current_correct=correct19
+if(n==20)
+current_correct=correct20
+if(n==21)
+current_correct=correct21
+if(n==22)
+current_correct=correct22
+if(n==23)
+current_correct=correct23
+if(n==24)
+current_correct=correct24
+if(n==25)
+current_correct=correct25
+if(n==26)
+current_correct=correct26
+if(n==27)
+current_correct=correct27
+if(n==28)
+current_correct=correct28
+if(n==29)
+current_correct=correct29
+if(n==30)
+current_correct=correct30
+if(n==31)
+current_correct=correct31
+if(n==32)
+current_correct=correct32
+if(n==33)
+current_correct=correct33
+if(n==34)
+current_correct=correct34
+if(n==35)
+current_correct=correct35
+if(n==36)
+current_correct=correct36
+if(n==37)
+current_correct=correct37
+if(n==38)
+current_correct=correct38
+if(n==39)
+current_correct=correct39
+if(n==40)
+current_correct=correct40
+if(n==41)
+current_correct=correct41
+if(n==42)
+current_correct=correct42
+if(n==43)
+current_correct=correct43
+if(n==44)
+current_correct=correct44
+if(n==45)
+current_correct=correct45
+if(n==46)
+current_correct=correct46
+if(n==47)
+current_correct=correct47
+if(n==48)
+current_correct=correct48
+if(n==49)
+current_correct=correct49
+if(n==50)
+current_correct=correct50
+
+
+//if(current_correct==2)
+//{
+//sw.feedback.value="Correct!"
+nr_correct++
+//}
+//else
+//{
+//sw.feedback.value="Not correct!"
+//sw.question.value="Correct Answer=Option "+current_correct
+
+}
+
+function answer3()
+{
+    sw.op1.disabled=true 
+      sw.op2.disabled=true
+         sw.op3.disabled=true
+           sw.op4.disabled =true
+             
+var current_correct
+if(n==1)
+current_correct=correct1
+if(n==2)
+current_correct=correct2
+if(n==3)
+current_correct=correct3
+if(n==4)
+current_correct=correct4
+if(n==5)
+current_correct=correct5
+if(n==6)
+current_correct=correct6
+if(n==7)
+current_correct=correct7
+if(n==8)
+current_correct=correct8
+if(n==9)
+current_correct=correct9
+if(n==10)
+current_correct=correct10
+if(n==11)
+current_correct=correct11
+if(n==12)
+current_correct=correct12
+if(n==13)
+current_correct=correct13
+if(n==14)
+current_correct=correct14
+if(n==15)
+current_correct=correct15
+if(n==16)
+current_correct=correct16
+if(n==17)
+current_correct=correct17
+if(n==18)
+current_correct=correct18
+if(n==19)
+current_correct=correct19
+if(n==20)
+current_correct=correct20
+if(n==21)
+current_correct=correct21
+if(n==22)
+current_correct=correct22
+if(n==23)
+current_correct=correct23
+if(n==24)
+current_correct=correct24
+if(n==25)
+current_correct=correct25
+if(n==26)
+current_correct=correct26
+if(n==27)
+current_correct=correct27
+if(n==28)
+current_correct=correct28
+if(n==29)
+current_correct=correct29
+if(n==30)
+current_correct=correct30
+if(n==31)
+current_correct=correct31
+if(n==32)
+current_correct=correct32
+if(n==33)
+current_correct=correct33
+if(n==34)
+current_correct=correct34
+if(n==35)
+current_correct=correct35
+if(n==36)
+current_correct=correct36
+if(n==37)
+current_correct=correct37
+if(n==38)
+current_correct=correct38
+if(n==39)
+current_correct=correct39
+if(n==40)
+current_correct=correct40
+if(n==41)
+current_correct=correct41
+if(n==42)
+current_correct=correct42
+if(n==43)
+current_correct=correct43
+if(n==44)
+current_correct=correct44
+if(n==45)
+current_correct=correct45
+if(n==46)
+current_correct=correct46
+if(n==47)
+current_correct=correct47
+if(n==48)
+current_correct=correct48
+if(n==49)
+current_correct=correct49
+if(n==50)
+current_correct=correct50
+
+
+//if(current_correct==3)
+//{
+
+//sw.feedback.value="Correct!"
+nr_correct++
+//}
+//else
+//{
+//sw.feedback.value="Not correct!"
+//sw.question.value="Correct Answer=Option "+current_correct
+
+}
+
+function answer4()
+{
+    sw.op1.disabled=true  
+      sw.op2.disabled=true
+         sw.op3.disabled=true
+           sw.op4.disabled =true
+             
+var current_correct
+if(n==1)
+current_correct=correct1
+if(n==2)
+current_correct=correct2
+if(n==3)
+current_correct=correct3
+if(n==4)
+current_correct=correct4
+if(n==5)
+current_correct=correct5
+if(n==6)
+current_correct=correct6
+if(n==7)
+current_correct=correct7
+if(n==8)
+current_correct=correct8
+if(n==9)
+current_correct=correct9
+if(n==10)
+current_correct=correct10
+if(n==11)
+current_correct=correct11
+if(n==12)
+current_correct=correct12
+if(n==13)
+current_correct=correct13
+if(n==14)
+current_correct=correct14
+if(n==15)
+current_correct=correct15
+if(n==16)
+current_correct=correct16
+if(n==17)
+current_correct=correct17
+if(n==18)
+current_correct=correct18
+if(n==19)
+current_correct=correct19
+if(n==20)
+current_correct=correct20
+if(n==21)
+current_correct=correct21
+if(n==22)
+current_correct=correct22
+if(n==23)
+current_correct=correct23
+if(n==24)
+current_correct=correct24
+if(n==25)
+current_correct=correct25
+if(n==26)
+current_correct=correct26
+if(n==27)
+current_correct=correct27
+if(n==28)
+current_correct=correct28
+if(n==29)
+current_correct=correct29
+if(n==30)
+current_correct=correct30
+if(n==31)
+current_correct=correct31
+if(n==32)
+current_correct=correct32
+if(n==33)
+current_correct=correct33
+if(n==34)
+current_correct=correct34
+if(n==35)
+current_correct=correct35
+if(n==36)
+current_correct=correct36
+if(n==37)
+current_correct=correct37
+if(n==38)
+current_correct=correct38
+if(n==39)
+current_correct=correct39
+if(n==40)
+current_correct=correct40
+if(n==41)
+current_correct=correct41
+if(n==42)
+current_correct=correct42
+if(n==43)
+current_correct=correct43
+if(n==44)
+current_correct=correct44
+if(n==45)
+current_correct=correct45
+if(n==46)
+current_correct=correct46
+if(n==47)
+current_correct=correct47
+if(n==48)
+current_correct=correct48
+if(n==49)
+current_correct=correct49
+if(n==50)
+current_correct=correct50
+
+
+//if(current_correct==4)
+//{
+
+//sw.feedback.value="Correct!"
+nr_correct++
+//}
+//else
+//{
+//sw.feedback.value="Not correct!"
+//sw.question.value="Correct Answer=Option "+current_correct
+
+}
+function rst()
+{
+var remarks
+var remarks2
+var grade
+var per
+per=nr_correct*100/50
+
+if(per>=90)
+{
+grade="A+"
+remarks="Excellent"
+remarks2="Pass"
+}
+else if(per>=80)
+{
+grade="A"
+remarks="Very Good"
+remarks2="Pass"
+}
+else if(per>=70)
+{
+grade="B"
+remarks="Good"
+remarks2="Pass"
+}
+
+else if(per>=60)
+{
+grade="C"
+remarks="Satisfactory"
+remarks2="Pass"
+}
+else if(per>=50)
+{
+grade="D"
+remarks="Not Bad"
+remarks2="Pass"
+}
+
+else if(per<50)
+{
+grade="FAIL"
+remarks="Poor"
+remarks2="Fail"
+}
+var wrong
+wrong=50-nr_correct
+document.write("<center><font size=7 color='#0058b0' face='Monotype Corsiva'><b>St. Patrick's Institute of Science & Technology</b></font>")
+document.write("<center><font size=6 color='#0058b0' face='Monotype Corsiva'>Result Sheet of DAE Aptitude Test</font>")
+
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Name</th><td width = 190>" + name + "</td></tr></table>")
+
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Roll Number</th><td width = 190>" + roll1 +   "</td></tr></table>")
+
+
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Test Name</th><td width = 190>" + test + "</td></tr></table>" )
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Total Questions</th><td width = 190> 50 </td></tr></table>")
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Correct Answers</th><td width = 190>" + nr_correct +  "</td></tr></table>") 
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Incorrect Answers</th><td width = 190>" + wrong +  "</td></tr></table>") 
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Percentage</th><td width = 190>" + per + "  %" + "</td></tr></table>") 
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Grade</th><td width = 190>" + grade +  "</td></tr></table>") 
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Remarks</th><td width = 190>" + remarks +  "</td></tr></table>") 
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Status</th><td width = 190>" + remarks2 +  "</td></tr></table>") 
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Total Time</th><td width = 190>60 Minutes</td></tr></table>") 
+document.write("<table border=1 bordercolor='#0058b0' cellspacing=6><tr><th width = 190 align=left>Time Consumed</th><td width = 190>" + tt +  "</td></tr></table>") 
+//document.write("<br><form><input type=button name=print value=Print onclick=window.print()</form>")
+
+//document.write("<br><br><form><input type='button' name='print' value='Print Result' onclick='window.print()' style='font-size: 14px; background-color: #0058b0; color: #ffffff; padding: 15px 30px; border-radius: 10px; cursor: pointer;'></form>");
+//document.write("
+
+
+document.write("<br><b>DAE Head&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp")
+document.write("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Principal<br>")
+document.write("<br><br><form><input type='button' name='print' value='Print Result' onclick='window.print()' style='font-size: 14px; background-color: #0058b0; color: #ffffff; padding: 15px 30px; border-radius: 10px; cursor: pointer;'></form>");
+
+}
+  
+</script>
+
+<SCRIPT language=Javascript>
+
+
+</script>
+
+
+
+
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 12px;
+	color: #3a3333;
+}
+body,td,th {
+	font-weight: bold;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	background-color: #250303;
+}
+    .style2
+    {
+        height: 40px;
+    }
+-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></HEAD>
+<BODY bgcolor="brown">
+
+<FORM name="sw">
+<div align="left">
+
+<div align="center">
+<TABLE cellPadding=0 width="778" 
+border=1 bordercolor="#0058b0" height="8">
+  
+  <TR>
+    <TD width="99" height="4" valign="center" align="left">
+      <p align="center">
+    <b>Name</b></p>    </TD>
+    <TD width="198" height="4">
+    <p align="center"><STRONG><INPUT id=text1 name=text1 size="26" tabIndex=1 
+            style="WIDTH: 194px; HEIGHT: 26px" maxlength="20" 
+     >
+    </STRONG></p>    </TD>
+	 
+	 <TD width="198" height="4"><p align="center">
+    <b>Roll_Number</b></p>    </TD>
+    <TD width="198" height="4">
+    <p align="center"><strong>
+      <input id=text3 name=text3 size="26" tabindex=1 style="WIDTH: 194px; HEIGHT: 26px" 
+     >
+    </strong></p>    </TD>
+	 
+	 
+	 
+    <TD width="79" height="4">
+    <p align="center"><b>Test</b></p>    </TD>
+    <TD width="182" height="4">
+    <p align="center"><b>
+        <INPUT id=text2 
+      style="LEFT: 298px; WIDTH: 180px; TOP: 54px; HEIGHT: 27px" tabIndex=0 
+      readOnly value=" DAE Aptitude Test" 
+      name 
+     =text2 size="24" 
+     ></b></p>    </TD>
+    <TD width="195" height="4">
+     <p align="center"><STRONG> 
+     <INPUT style="FONT-WEIGHT: bold; FONT-SIZE: large; LEFT: 0px; WIDTH: 192px; CURSOR: hand; COLOR: black; FONT-STYLE: normal; FONT-FAMILY: serif; TOP: 1px; HEIGHT: 33px; FONT-VARIANT: normal" onClick="Up()" tabIndex=2 type=button align=left size=10 value="Start the Test" name=start height="30">
+      </STRONG> </p>    </TD></TR></TABLE>
+  </div>
+<div align="left">
+  <table border="1" cellpadding="0" width="98%" bordercolor="#0058b0">
+    <tr>
+      <td width="18%"><input style="FONT-WEIGHT: bold; FONT-SIZE: larger; WIDTH: 106px; FONT-FAMILY: serif; TOP: 0px; 
+      HEIGHT: 56px" size=11 name=q value=Question align=middle readonly></td>
+      <td width="82%"><TEXTAREA style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 663px; FONT-FAMILY: serif; HEIGHT: 56px; BORDER-BOTTOM-STYLE: none" tabIndex=0 name=question rows=1 readOnly cols=57 scrolling="no" value=""></TEXTAREA> </td>
+    </tr>
+    <tr>
+      <td width="18%" valign="center" align="middle"><input type=button value="Option 1" name=op1 onclick=answer1(this.form) style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 100px; CURSOR: hand; FONT-STYLE: normal; FONT-FAMILY: serif; HEIGHT: 24px" disabled size=15>      </td>
+      <td width="82%"><input name=a1 size=65 style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 663px; COLOR: black; FONT-FAMILY: serif; 
+      HEIGHT: 26px" 
+      readOnly tabIndex=0>      </td>
+    </tr>
+    <tr>
+      <td width="18%" valign="center" align="middle"><input type=button value="Option 2" name=op2 onclick=answer2(this.form) style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 100px; CURSOR: hand; FONT-STYLE: normal; FONT-FAMILY: serif; HEIGHT: 24px" disabled size=15>      </td>
+      <td width="82%"><input name=a2 size=65 style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 663px; FONT-FAMILY: serif; HEIGHT: 24px" 
+      readOnly tabIndex=0>      </td>
+    </tr>
+    <tr>
+      <td width="18%" valign="center" align="middle"><input type=button value="Option 3" name=op3 onclick=answer3(this.form) style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 100px; CURSOR: hand; FONT-STYLE: normal; FONT-FAMILY: serif; HEIGHT: 24px" disabled size=15>      </td>
+      <td width="82%"><input name=a3 size=65 style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 664px; FONT-FAMILY: serif; HEIGHT: 24px" 
+      readOnly tabIndex=0>      </td>
+    </tr>
+    <tr>
+      <td width="18%" valign="center" align="middle"><input type=button value="Option 4" name=op4 onclick=answer4(this.form) style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 100px; CURSOR: hand; FONT-STYLE: normal; FONT-FAMILY: serif; HEIGHT: 24px" disabled size=15>      </td>
+      <td width="82%"><input name=a4 size=65 style="FONT-WEIGHT: bold; FONT-SIZE: large; WIDTH: 665px; FONT-FAMILY: serif; HEIGHT: 23px" 
+      readOnly tabIndex=0>      </td>
+    </tr>
+  </table>
+</div>
+</div>
+<div align="center">
+<br>
+<center>
+<TABLE cellPadding=0 width="100%" 
+border=1 bordercolor="#0058b0" height="8">
+  
+  <TR>
+    <TD width="548" valign="center" align="left" class="style2">
+      <p align="center">
+    <INPUT style="FONT-WEIGHT: bold; FONT-SIZE: small; WIDTH: 118px; COLOR: black; FONT-FAMILY: serif; HEIGHT: 30px; TEXT-ALIGN: center" 
+      size=7 name=ttest value="Test Time" readOnly></p>    </TD>
+    <TD width="175" class="style2">
+    <INPUT style="FONT-WEIGHT: bold; FONT-SIZE: medium; WIDTH: 114px; COLOR: red; FONT-FAMILY: serif; HEIGHT: 30px; TEXT-ALIGN: center" 
+      size=7 name=disp1 readOnly></TD>
+    <TD width="164" class="style2">
+    <INPUT style="FONT-WEIGHT: bold; FONT-SIZE: medium; WIDTH: 144px; COLOR: blue; FONT-FAMILY: serif; HEIGHT: 30px; TEXT-ALIGN: center" 
+      readOnly size=26 name=feedback height="30"></TD>
+    <TD width="135" class="style2">
+    <INPUT style="FONT-WEIGHT: bold; FONT-SIZE: small; WIDTH: 192px; CURSOR: hand; FONT-STYLE: normal; FONT-FAMILY: serif; HEIGHT: 31px" disabled onclick=next(this.form) tabIndex=7 type=button size=15 value="Next Question" name=nxt height="30">    </TD>
+    <TD width="543" class="style2">
+     <INPUT style="FONT-WEIGHT: bold; FONT-SIZE: small; WIDTH: 186px; CURSOR: hand; FONT-STYLE: normal; FONT-FAMILY: serif; HEIGHT: 31px" 
+            onclick=rst(this.form) type=button align=left size=7 value=Result name=result 
+            height="30" disabled="disabled">
+     <input type=hidden name="beg1" size="7" value="0.60">    </TD></TR></TABLE>
+</center>
+</div></FORM>
+<h3 align="center" class="style1">&nbsp;</h3>
+</BODY>
+</html>
+
